@@ -46,9 +46,9 @@ const Contact = () => {
     {
       id: 2,
       name: "GitHub",
-      username: "/yourusername",
+      username: "/deeksha-sharma-portfolio",
       icon: "💻",
-      link: "https://github.com/yourusername",
+      link: "https://sharmadeeksha1311.github.io/deeksha-sharma-portfolio/",
       color: "#333"
     }
   ];

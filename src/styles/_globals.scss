@@ -1,0 +1,62 @@
+@use 'variables' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: $font-main;
+  background: $color-bg-body;
+  color: $color-text-main;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+/* Simple scrollbar tweak (optional) */
+*::-webkit-scrollbar {
+  width: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(30, 64, 175, 0.6);
+  border-radius: 999px;
+}
+
+.cursive-writing {
+  font-family: "Bradley Hand", "Comic Sans MS", "Segoe Script", cursive;
+}
+
+.font-12 {
+  font-size: 12px;
+}
+
+.font-16 {
+  font-size: 16px;
+}
+
+.font-20 {
+  font-size: 20px;
+}
+
+.font-24 {
+  font-size: 24px;
+}
+
+.font-32 {
+  font-size: 32px;
+}
+
+.font-36 {
+  font-size: 36px;
+}

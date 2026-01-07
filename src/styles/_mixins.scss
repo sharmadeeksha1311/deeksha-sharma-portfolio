@@ -1,0 +1,29 @@
+@use 'variables' as *;
+
+@mixin flex-center($gap: 0) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $gap;
+}
+
+@mixin pill {
+  border-radius: $radius-pill;
+}
+
+@mixin card-base {
+  border-radius: $radius-card;
+  padding: 1.25rem;
+  background: $color-card-bg;
+  border: 1px solid $color-border-strong;
+}
+
+@mixin section-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+@mixin text-muted() {
+  color: $color-text-main;
+}

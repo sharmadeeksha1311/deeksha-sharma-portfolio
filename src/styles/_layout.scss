@@ -1,0 +1,278 @@
+@use 'sass:color';
+@use 'variables' as *;
+@use 'mixins' as *;
+
+/* Layout containers */
+.main {
+  & section:not(#hero) {
+    padding: 2rem 1.5rem 4rem;
+    max-width: 1120px;
+    margin: 0 auto;
+
+    @media (max-width: 767px) {
+      padding: 1.5rem 1rem 3rem;
+    }
+  }
+}
+
+/* Sections */
+.section {
+  margin-bottom: 3rem;
+
+  @media (max-width: 767px) {
+    margin-bottom: 2rem;
+  }
+}
+
+.section__title {
+  @include section-title;
+  margin-bottom: 2rem;
+
+  @media (max-width: 767px) {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.section__text {
+  @include text-muted();
+}
+
+/* Skills Grid */
+.skills-grid {
+  padding: 25px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  @media (max-width: 767px) {
+    padding: 15px 0px;
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    gap: 1.75rem;
+  }
+}
+
+/* Skill Row - Responsive Grid */
+.skill-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(31, 41, 55, 0.15);
+  transition: border-color 0.3s ease;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 180px 1fr;
+    gap: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: minmax(0, 0.25fr) minmax(0, 1fr);
+  }
+
+  &:hover {
+    border-bottom-color: rgba(31, 41, 55, 0.3);
+  }
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+/* Skill Label */
+.skill-row__label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: color.adjust($color-text-muted, $lightness: 8%);
+  font-weight: 600;
+  padding-top: 0.25rem;
+  line-height: 1.4;
+
+  @media (min-width: 480px) {
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 0.78rem;
+    padding-top: 0.3rem;
+  }
+}
+
+/* Chips Container */
+.skill-row__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+
+  @media (max-width: 479px) {
+    gap: 0.4rem;
+  }
+
+  @media (min-width: 768px) {
+    gap: 0.6rem;
+  }
+}
+
+/* Skill Chip */
+.skill-chip {
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: $color-text-main;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(55, 65, 81, 0.6);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  @media (max-width: 479px) {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.72rem;
+  }
+
+  @media (min-width: 768px) {
+    padding: 0.45rem 0.9rem;
+    font-size: 0.82rem;
+  }
+
+  /* Gradient border effect */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(
+      from 0deg,
+      color.adjust($color-primary-from, $lightness: 10%),
+      color.adjust($color-primary-to, $lightness: 10%),
+      color.adjust($color-primary-from, $lightness: 10%)
+    );
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transform: rotate(0deg);
+    transition:
+      opacity 0.3s ease,
+      transform 0.8s linear;
+  }
+
+  /* Shimmer effect */
+  &::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 70%
+    );
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    transition: transform 0.6s ease;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    background: rgba($color-primary-to, 0.12);
+    border-color: color.adjust($color-primary-from, $lightness: 15%);
+    color: #f9fafb;
+    box-shadow: 0 4px 12px rgba($color-primary-from, 0.2);
+
+    &::before {
+      opacity: 1;
+      animation: rotate-border 3s linear infinite;
+    }
+
+    &::after {
+      transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba($color-primary-from, 0.15);
+  }
+
+  @media (hover: none) {
+    &:active {
+      background: rgba($color-primary-to, 0.12);
+      border-color: color.adjust($color-primary-from, $lightness: 15%);
+      transform: scale(0.97);
+    }
+  }
+}
+
+@keyframes rotate-border {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Experience and other sections */
+.experience-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.highlights-grid {
+  display: grid;
+  gap: 1rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.footer {
+  border-top: 1px solid #111827;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  font-size: 0.7rem;
+  color: #6b7280;
+}
+
+/* Responsive Layout Tweaks */
+@media (min-width: 768px) {
+  .hero {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  }
+
+  .contact-grid {
+    grid-template-columns: 2fr 1.2fr;
+  }
+}

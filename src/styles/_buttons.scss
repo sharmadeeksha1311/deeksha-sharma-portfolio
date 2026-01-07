@@ -1,0 +1,103 @@
+@use 'sass:color';
+@use 'variables' as *;
+@use 'mixins' as *;
+
+/* Buttons, badges, cards */
+.btn-primary {
+  @include pill;
+  @include flex-center(0.4rem);
+  padding: 0.6rem 1.4rem;
+  border: none;
+  background: linear-gradient(90deg, $color-primary-from, $color-primary-to);
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.25s ease;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.16), transparent 55%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+  }
+
+  &:hover {
+    transform: translateY(-1px) scale(1.01);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.8);
+
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  &:active {
+    transform: translateY(0) scale(0.99);
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.7);
+  }
+}
+
+.btn-secondary {
+  @include pill;
+  @include flex-center(0.4rem);
+  padding: 0.55rem 1.3rem;
+  background: none;
+  border: 2px solid color.adjust($color-primary-to, $lightness: 10%);
+  border: 1px solid #e5e7eb;
+  color: #111827;
+  font-size: 0.8rem;
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.25s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    border: 2px solid color.adjust($color-primary-to, $lightness: 10%);
+    background: rgba($color-primary-to, 0.8);
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.85);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.badge {
+  @include pill;
+  border: 1px solid rgba(55, 65, 81, 0.9);
+  background: $color-badge-bg;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.7rem;
+  color: color.adjust($color-text-muted, $lightness: 20%);
+  transition: transform 0.18s ease, background 0.18s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    background: rgba(30, 64, 175, 0.25);
+  }
+}
+
+.card {
+  @include card-base;
+  margin: 20px 0px;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.chip {
+  @include pill;
+  padding: 0.3rem 0.8rem;
+  background: $color-card-bg;
+  border: 1px solid $color-border-soft;
+  font-size: 0.7rem;
+}
